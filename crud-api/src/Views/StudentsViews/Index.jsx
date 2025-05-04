@@ -5,20 +5,20 @@ import {Link} from 'react-router-dom';
 import { confirmation, sendRequest } from '../../functions';
 
 const StudentsViews = () => {
-  const [departments, setDepartments] = useState([]);
+  const [students, setStudents] = useState([]);
   const [classLoad, setClassLoad] = useState('d-none');
   const [classTable, setClassTable] = useState('d-none');
   useEffect(() => {
-    getDepartments();
+    getStudents();
   }, []);
-  const getDepartments = async () => {
-    const res = await sendRequest('GET', {}, '/api/departments', '');
-    setDepartments(res);
+  const getStudents = async () => {
+    const res = await sendRequest('GET', {}, '/api/students', '');
+    setStudents(res);
     setClassTable('');
     setClassLoad('d-none');
   }
-  const deleDepartment = (id, name) => {
-    confirmation(name, ('/api/departments/' + id));
+  const deleteStudents = (id, name) => {
+    confirmation(name, ('/api/students/' + id));
   }
 
   return (
@@ -30,9 +30,9 @@ const StudentsViews = () => {
       </DivAdd>
       <DivTable col='6' off='3' classLoad={classLoad} classTable={classTable}>
         <table className='table table-bordered'>
-          <thead><tr><tr>#</tr><tr>DEOARTMENT</tr><th></th><th></th></tr></thead>
+          <thead><tr><tr>#</tr><tr>ESTUDENTS</tr><th></th><th></th></tr></thead>
           <tbody className='table-group-divider'>
-            {departments.map ((row, i)=>(
+            {students.map ((row, i)=>(
               <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{row.id}</td>
@@ -43,7 +43,7 @@ const StudentsViews = () => {
                 </td>
                 <td>
                   <button className='btn btn-danger'
-                    onClick={() => deleDepartment(row.id, row.name)}>
+                    onClick={() => deleteStudents(row.id, row.name)}>
                     <i className='fa-solid fa-trash'></i>
 
                   </button>
