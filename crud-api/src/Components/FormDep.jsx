@@ -7,7 +7,7 @@ const FormDep = (params) => {
     const [name, setName] = useState('');
     const NameImput = useRef(null);
     let method = 'POST';
-    let url = '/api/departments';
+    let url = '/api/students'; // default url (double check this)
     let redirect='';
     useEffect(() => {
         NameInput.current.focus();
@@ -23,7 +23,7 @@ const FormDep = (params) => {
         e.preventDefault();
         if(params.id !== null) {
             method= 'PUT';
-            url = '/api/departments/'+params.id;
+            url = '/api/students/'+params.id; // default url (double check this)
             redirect ='/';
         }
         const res = await sendRequest(method, {name:name}, url, redirectDocument);
